@@ -23,7 +23,7 @@ const buildHeaders = (originalHeaders: Headers, targetHost?: string) => {
   originalHeaders.forEach((value, key) => {
     const lowerKey = key.toLowerCase();
     if (!EXCLUDED_REQ_HEADERS.includes(lowerKey) && 
-        !(lowerKey.startsWith('x-') && lowerKey !== 'x-api-key')) {
+        !(lowerKey.startsWith('x-') && !['x-api-key', 'x-goog-api-key'].includes(lowerKey))) {
       headers.set(key, value);
     }
   });
